@@ -35,4 +35,18 @@ public class Network {
 	public Place[] getPlacesArray() {
 		return (Place[]) places.values().toArray();
 	}
+
+	/**
+	 * @return the places
+	 */
+	public Map<String, Place> getPlaces() {
+		return places;
+	}
+
+	/**
+	 * @param places the places to set
+	 */
+	public void setPlaces(Map<String, Place> places) {
+		this.places = places;
+	}
 }

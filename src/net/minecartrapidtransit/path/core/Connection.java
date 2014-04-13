@@ -61,4 +61,32 @@ public class Connection {
 	public Station getDestination() {
 		return destination;
 	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	/**
+	 * @param distance the distance to set
+	 */
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @param destination the destination to set
+	 */
+	public void setDestination(Station destination) {
+		this.destination = destination;
+	}
 }
