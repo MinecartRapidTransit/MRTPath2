@@ -15,6 +15,7 @@ public class NavNode extends Station {
 	 * @param name The name of the Station.
 	 * @param id The ID of the Station (e.g. Y14).
 	 * @param connections The connections of the station.
+	 * @param the place that the station is in.
 	 */
 	public NavNode(String name, String id, ArrayList<Connection> connections) {
 		super(name, id, connections);

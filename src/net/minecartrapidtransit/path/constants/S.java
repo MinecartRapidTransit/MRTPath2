@@ -6,4 +6,5 @@ public class S {
 	public static final String type_RAIL = "RAIL";
 	public static final String type_HSRAIL = "HIGHSPEEDRAIL";
 	public static final String type_WARP = "WARP";
+	public static final String type_TRANSFER = "TRANSFER";
 }
