@@ -19,8 +19,7 @@ public class Place {
 	public Place(String id, String name, List<Station> stations){
 		this.id = id;
 		this.name = name;
-		this.stations = new LinkedList<Station>();
-		for(Station station : stations){
+		for(Station station : this.stations){
 			addStation(station);
 		}
 	}

@@ -25,8 +25,8 @@ public class Network {
 	 * @param id The id of the place to add.
 	 * @param place The place to add.
 	 */
-	public void addPlace(Place place) {
-		places.put(place.getId(), place);
+	public void addPlace(String id, Place place) {
+		places.put(id, place);
 	}
 	
 	/*
