@@ -69,5 +69,33 @@ public class Place {
 		}
 		return l;
 	}
+
+	/**
+	 * @return the stations
+	 */
+	public List<Station> getStations() {
+		return stations;
+	}
+
+	/**
+	 * @param stations the stations to set
+	 */
+	public void setStations(List<Station> stations) {
+		this.stations = stations;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 }
 
