@@ -1,35 +1,18 @@
 package net.minecartrapidtransit.path.core;
 
- 
 
-import java.util.ArrayList;
-
-public class NavNode extends Station {
+public class NavNode extends Place {
 
 	private boolean visited;
 	private int distanceToStart;
 	private NavNode prev;
-	
-	/**
-	 * Constructor if no station Object is built. Cunstructs a new NavNode.
-	 * @param name The name of the Station.
-	 * @param id The ID of the Station (e.g. Y14).
-	 * @param connections The connections of the station.
-	 * @param the place that the station is in.
-	 */
-	public NavNode(String name, String id, ArrayList<Connection> connections) {
-		super(name, id, connections);
-		visited = false;
-		distanceToStart = -1;
-		prev = null;
-	}
 
 	/**
 	 * Constructs a new NavNode.
-	 * @param s The station represented by this NavNode.
+	 * @param p The place represented by this NavNode.
 	 */
-	public NavNode(Station s) {
-		super(s.getName(), s.getId(), s.getConnections());
+	public NavNode(Place p) {
+		super(p.getName(), p.getId());
 		visited = false;
 		distanceToStart = -1;
 		prev = null;
