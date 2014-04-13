@@ -31,7 +31,7 @@ public class Connection {
 			this.distance = 1;
 		}
 		else if (this.type.equals(S.type_TRANSFER)) {
-			this.distance = 10;
+			this.distance = 100;
 			this.name = destination.getName();
 		}
 	}
