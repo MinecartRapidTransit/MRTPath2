@@ -1,5 +1,6 @@
 package net.minecartrapidtransit.path.core;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -59,5 +60,14 @@ public class Place {
 		stations.add(station);
 	}
 	
+	public List<Connection> getConnections() {
+		List<Connection> l = new ArrayList<Connection>();
+		for(Station s : stations){
+			for (Connection c : s.getConnections()) {
+				l.add(c);
+			}
+		}
+		return l;
+	}
 }
 
