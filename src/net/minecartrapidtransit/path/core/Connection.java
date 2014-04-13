@@ -1,7 +1,5 @@
 package net.minecartrapidtransit.path.core;
 
- 
-
 import net.minecartrapidtransit.path.constants.S;
 
 public class Connection {
