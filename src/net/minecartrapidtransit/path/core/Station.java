@@ -70,18 +70,4 @@ public class Station {
 	public void addConnection(Connection connection){
 		connections.add(connection);
 	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
 }
