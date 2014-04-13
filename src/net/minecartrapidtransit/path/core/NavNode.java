@@ -11,7 +11,7 @@ public class NavNode extends Station {
 	private NavNode prev;
 	
 	/**
-	 * Constructor if no station Object is built. Cunstructs a new NavNode.
+	 * Constructor if no station Object is built. Constructs a new NavNode.
 	 * @param name The name of the Station.
 	 * @param id The ID of the Station (e.g. Y14).
 	 * @param connections The connections of the station.
