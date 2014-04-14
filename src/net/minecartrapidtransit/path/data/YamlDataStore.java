@@ -22,11 +22,12 @@ public class YamlDataStore implements DataFormat {
 
 	@Override
 	public Network decodeNetwork(String string) {
-		return null;
+		Yaml yaml = getYaml();
+		return ((NetworkData) yaml.load(string)).toNetwork();
 	}
 	
 	private Yaml getYaml(){
-		return new Yaml(new Constructor(Network.class));
+		return new Yaml();
 	}
 	
 	//TODO remove this
@@ -45,6 +46,10 @@ public class YamlDataStore implements DataFormat {
 		place2.addStation(station2);
 		network.addPlace(place1);
 		network.addPlace(place2);
-		System.out.println(new YamlDataStore().encodeNetwork(network));
+		String yaml = new YamlDataStore().encodeNetwork(network);
+		Network net2 = new YamlDataStore().decodeNetwork(yaml);
+		String yaml2 = new YamlDataStore().encodeNetwork(net2);
+		System.out.println(yaml2);
+		
 	}
 }

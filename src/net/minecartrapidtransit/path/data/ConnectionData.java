@@ -8,7 +8,7 @@ public class ConnectionData {
 		this.type = connection.getType();
 		this.distance = connection.getDistance();
 		this.name = connection.getName();
-		this.to = connection.getDestination().getName();
+		this.to = connection.getDestination().getId();
 	}
 	
 	public Connection toConnection(NetworkData network){

@@ -1,7 +1,6 @@
 package net.minecartrapidtransit.path.data;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 import net.minecartrapidtransit.path.core.Connection;
@@ -39,6 +38,8 @@ public class NetworkData {
 	}
 	
 	public Network toNetwork() {
+		connections = new HashMap<Connection, String>();
+		stations = new HashMap<String, Station>();
 		Network network = new Network();
 		for(PlaceData placedata : places.values()) {
 			network.addPlace(placedata.toPlace(this));
@@ -54,6 +55,7 @@ public class NetworkData {
 	}
 	
 	public void needsStation(Connection connection, String station){
+		System.out.println(station);
 		connections.put(connection, station);
 	}
 	
