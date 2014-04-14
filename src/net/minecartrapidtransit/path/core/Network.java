@@ -7,14 +7,14 @@ public class Network {
 
 	Map<String, Place> places;
 	
-	/*
+	/**
 	 * Constructs a blank network.
 	 */
 	public Network() {
 		places = new HashMap<String, Place>();
 	}
 	
-	/*
+	/**
 	 * @param id The id of the place to get.
 	 */
 	public Place getPlaceByID(String id) {
@@ -29,7 +29,7 @@ public class Network {
 		places.put(place.getId(), place);
 	}
 	
-	/*
+	/**
 	 * @returns an array of places.
 	 */
 	public Place[] getPlacesArray() {

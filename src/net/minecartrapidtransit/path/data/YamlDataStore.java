@@ -15,8 +15,9 @@ public class YamlDataStore implements DataFormat {
 
 	@Override
 	public String encodeNetwork(Network network) {
+		NetworkData nd = new NetworkData(network);
 		Yaml yaml = getYaml();
-		return yaml.dump(network);
+		return yaml.dump(nd);
 	}
 
 	@Override
