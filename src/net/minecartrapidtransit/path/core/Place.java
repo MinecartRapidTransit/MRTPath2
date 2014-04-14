@@ -70,6 +70,18 @@ public class Place {
 		}
 		return l;
 	}
+	
+	public List<Connection> getConnectionsWithoutTransfer() {
+		List<Connection> l = new ArrayList<Connection>();
+		for(Station s : stations){
+			for (Connection c : s.getConnections()) {
+				if (!c.getType().equals(S.type_TRANSFER)) {
+					l.add(c);
+				}
+			}
+		}
+		return l;
+	}
 
 	/**
 	 * @return the stations
