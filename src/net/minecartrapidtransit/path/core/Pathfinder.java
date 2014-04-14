@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Pathfinder {
 
-	public static String getShortestRoute(List<Place> places, Place pStart, Place pEnd) {
+	public static Path getShortestRoute(List<Place> places, Place pStart, Place pEnd) {
 		NavNode start = new NavNode(pStart);
 		NavNode end = new NavNode(pEnd);
 		NavNode current = start;
 		
 		if (start == null || end == null)
-			return "ERR:WrongPlace(s)";
+			return null;
 		start.setDistanceToStart(0);
 		
 		List<NavNode> nn = new ArrayList<NavNode>();
@@ -37,11 +37,11 @@ public class Pathfinder {
 		current = end;
 		String temp = "";
 		while (current != start) {
-			temp = "-" + findConnectionByNavNode(current.getPrev().getConnections(), current).getType() + "-" + current.getId() + temp;
+			temp = "-" + findConnectionByNavNode(current.getPrev().getConnections(), current).getType() + "," + findConnectionByNavNode(current.getPrev().getConnections(), current).getName() + "-" + current.getId() + temp;
 			current = current.getPrev();
 		}
 		
-		return start.getId() + temp;
+		return new Path(temp, places);
 	}
 	
 	private static NavNode findNavNodeByPlace(Place p, List<NavNode> pN) {
@@ -57,7 +57,7 @@ public class Pathfinder {
 		int shortest = -1;
 		NavNode next = null;
 		for (NavNode n : pN) {
-			if (n.getDistanceToStart() != -1) {
+			if (n.getDistanceToStart() != -1 && !n.isVisited()) {
 				if (shortest == -1 || shortest == 0) {
 					shortest = n.getDistanceToStart();
 					next = n;
