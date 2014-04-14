@@ -10,7 +10,6 @@ public class PlaceData {
 	
 	public PlaceData() {} // For javabean spec
 	public PlaceData(Place place){
-		this.id = place.getId();
 		this.name = place.getName();
 		this.stations = new LinkedList<StationData>();
 		for(Station station : place.getStations()) {
@@ -18,25 +17,14 @@ public class PlaceData {
 		}
 	}
 	
-	public Place toPlace(NetworkData network){
-		Place place = new Place(this.id, this.name);
+	public Place toPlace(NetworkData network, String id){
+		Place place = new Place(id, this.name);
 		for(StationData sd : stations){
 			place.addStation(sd.toStation(network));
 		}
 		return place;
 	}
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	/**
 	 * @return the name
 	 */
@@ -61,7 +49,6 @@ public class PlaceData {
 	public void setStations(List<StationData> stations) {
 		this.stations = stations;
 	}
-	private String id;
 	private String name;
 	private List<StationData> stations;
 	

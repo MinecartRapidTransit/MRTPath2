@@ -41,8 +41,8 @@ public class NetworkData {
 		connections = new HashMap<Connection, String>();
 		stations = new HashMap<String, Station>();
 		Network network = new Network();
-		for(PlaceData placedata : places.values()) {
-			network.addPlace(placedata.toPlace(this));
+		for(String key : places.keySet()) {
+			network.addPlace(places.get(key).toPlace(this, key));
 		}
 		for(Connection connection : connections.keySet()){
 			connection.setDestination(stations.get(connections.get(connection)));
@@ -55,7 +55,6 @@ public class NetworkData {
 	}
 	
 	public void needsStation(Connection connection, String station){
-		System.out.println(station);
 		connections.put(connection, station);
 	}
 	
