@@ -9,7 +9,6 @@ import net.minecartrapidtransit.path.core.Place;
 import net.minecartrapidtransit.path.core.Station;
 
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
 
 public class YamlDataStore implements DataFormat {
 
