@@ -21,38 +21,60 @@ public class Pathfinder {
 		}
 		
 		List<Connection> c = current.getConnectionsWithoutTransfer();
-		int shortest = 0;
-		NavNode next = null;
-		
-		
-		for (Connection curr : c) {
-			if(findNavNodeByPlace(curr.getDestination().getPlace(), nn).getDistanceToStart() == -1 || findNavNodeByPlace(curr.getDestination().getPlace(), nn).getDistanceToStart() > (current.getDistanceToStart() + curr.getDistance())) {
-				findNavNodeByPlace(curr.getDestination().getPlace(), nn).setDistanceToStart(current.getDistanceToStart() + curr.getDistance());
-			}
-		}
 		
 		while (current != null && current != end) {
-			
-			//TODO Add NavNode Class for stations and make seperate Pathfinder for Stations!
-			/*
 			for (Connection curr : c) {
-				if(.getDestination().getDistanceToStart() == -1 || c.get(i).getNode().getDistanceToStart() > (current.getDistanceToStart() + c.get(i).getLength())) {
-					
+				if(findNavNodeByPlace(curr.getDestination().getPlace(), nn).getDistanceToStart() == -1 || findNavNodeByPlace(curr.getDestination().getPlace(), nn).getDistanceToStart() > (current.getDistanceToStart() + curr.getDistance())) {
+					findNavNodeByPlace(curr.getDestination().getPlace(), nn).setDistanceToStart(current.getDistanceToStart() + curr.getDistance());
+					findNavNodeByPlace(curr.getDestination().getPlace(), nn).setPrev(current);
 				}
 			}
 			current.setVisited(true);
-			current = n.getNext();
-			*/
+			current = getNext(nn);
+			c = current.getConnections();
 		}
 		
-		//TODO Remove this
-		return "";
+		current = end;
+		String temp = "";
+		while (current != start) {
+			temp = "-" + findConnectionByNavNode(current.getPrev().getConnections(), current).getType() + "-" + current.getId() + temp;
+			current = current.getPrev();
+		}
+		
+		return start.getId() + temp;
 	}
 	
 	private static NavNode findNavNodeByPlace(Place p, List<NavNode> pN) {
 		for (NavNode n : pN) {
 			if (n.getId().equals(p.getId())) {
 				return n;
+			}
+		}
+		return null;
+	}
+	
+	private static NavNode getNext(List<NavNode> pN) {
+		int shortest = -1;
+		NavNode next = null;
+		for (NavNode n : pN) {
+			if (n.getDistanceToStart() != -1) {
+				if (shortest == -1 || shortest == 0) {
+					shortest = n.getDistanceToStart();
+					next = n;
+				}
+				else if (n.getDistanceToStart() < shortest) {
+					shortest = n.getDistanceToStart();
+					next = n;
+				}
+			}
+		}
+		return next;
+	}
+	
+	private static Connection findConnectionByNavNode(List<Connection> pC, NavNode dest) {
+		for (Connection c : pC) {
+			if (c.getDestination().equals(dest)) {
+				return c;
 			}
 		}
 		return null;
