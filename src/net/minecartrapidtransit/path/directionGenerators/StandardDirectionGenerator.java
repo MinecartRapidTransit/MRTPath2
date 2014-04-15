@@ -4,9 +4,7 @@ import net.minecartrapidtransit.path.constants.S;
 import net.minecartrapidtransit.path.core.*;
 
 public class StandardDirectionGenerator implements DirectionGenerator {
-	
-	private String originalName = null;
-	
+		
 	@Override
 	public String generateDirection(Step current, Step next) {
 		// System.out.printf("%s: %s\n", current.getType(), current.getTo().getId()); // Used for debug
@@ -22,12 +20,7 @@ public class StandardDirectionGenerator implements DirectionGenerator {
 		case S.type_RAIL:
 		case S.type_HSRAIL:
 			if(next.getType().equals(S.type_TRANSFER) || next.getType().equals(S.type_FOOT)){
-				if(originalName == null) originalName = current.getData();
-				String ret =  String.format("Ride the %s until you reach %s.", originalName, current.getTo().getPlace().getName());
-				originalName = null;
-				return ret;
-			}else if(originalName == null){
-				originalName = current.getData();
+				return String.format("Ride the %s until you reach %s.", current.getData(), current.getTo().getPlace().getName());
 			}
 			break;
 		case S.type_BUS:
@@ -39,7 +32,7 @@ public class StandardDirectionGenerator implements DirectionGenerator {
 				return String.format("Take the warp, %s, to %s.", current.getData(), current.getTo().getPlace().getName());
 			}
 		case S.type_TRANSFER:
-			return String.format("Transfer to %s.", current.getTo().getName());
+			return String.format("Transfer to the %s.", current.getTo().getName());
 		}
 		return null;
 	}

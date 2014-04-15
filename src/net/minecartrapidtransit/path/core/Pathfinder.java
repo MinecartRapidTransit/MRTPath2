@@ -95,7 +95,7 @@ public class Pathfinder {
 		
 		Network network = new YamlDataStore().decodeNetwork(readFile("res/mrtnetwork.yml", Charset.defaultCharset()));
 		Place p1 = network.getPlaceByID("greaterWestSpawn");
-		Place p2 = network.getPlaceByID("gundValley");
+		Place p2 = network.getPlaceByID("welcomeville");
 		Route route = Pathfinder.getShortestRoute(network, p1, p2);
 		String[] results = route.getDirections(new StandardDirectionGenerator());
 		for(String line : results){
