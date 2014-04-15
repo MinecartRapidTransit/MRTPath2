@@ -43,12 +43,18 @@ public class Pathfinder {
 				// Woot we have found a smallest path.
 				break;
 			}
+
 			nodes.remove(nodes.indexOf(min)); // Sets it as visited
 
 			
 			// Now we look for connections
 			for(Connection connection : min.getConnections()){
-				NavNode destination = node_lookup.get(connection.getDestination().getId());
+				NavNode destination;
+				try{
+					destination = node_lookup.get(connection.getDestination().getId());
+				}catch(NullPointerException e){
+					continue;
+				}
 				if(nodes.contains(destination)){ // If it is not visited
 					if(destination.getDistanceToStart() == -1){
 						
@@ -83,8 +89,8 @@ public class Pathfinder {
 	
 	public static void main(String[] args){
 		Network network = new YamlDataStore().decodeNetwork(args[0]);
-		Place p1 = network.getPlaceByID("ARLI");
-		Place p2 = network.getPlaceByID("RVTH");
+		Place p1 = network.getPlaceByID("greaterWestSpawn");
+		Place p2 = network.getPlaceByID("gundValley");
 		Route route = Pathfinder.getShortestRoute(network, p1, p2);
 		String[] results = route.getDirections(new StandardDirectionGenerator());
 		for(String line : results){

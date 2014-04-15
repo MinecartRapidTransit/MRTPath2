@@ -15,11 +15,8 @@ places:
       - {name: MRT Red Line Eastbound, distance: 232, to: R6, type: RAIL}
   greaterWestSpawn:
     name: Greater West Spawn
-    stations:
     - id: R6
-      name: Greater West Spawn MRT
-      connections:
-      - {name: MRT Red Line Westbound, distance: 232, to: R7, type: RAIL}
+      name: Greater West Spawn MRT      
   # Blue Line
   gundValley:
     name: Gund Valley
@@ -118,7 +115,6 @@ places:
       - {name: MRT Blue Line Eastbound, distance: 319, to: B13, type: RAIL}
   theatreDistrict:
     name: Theatre District
-    stations:
     - id: B14
       name: Theatre District MRT
       connections:
