@@ -5,19 +5,19 @@ places:
     name: Spawn Station
     stations:
     - id: B13
-      name: Spawn Station MRT
+      name: Spawn Station MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 286, to: B12, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 213, to: B14, type: RAIL}
     - id: R7
-      name: Spawn Station MRT
+      name: Spawn Station MRT Red
       connections:
       - {name: MRT Red Line Eastbound, distance: 232, to: R6, type: RAIL}
   greaterWestSpawn:
     name: Greater West Spawn
     stations:
     - id: R6
-      name: Greater West Spawn MRT
+      name: Greater West Spawn MRT Red
       connections:
       - {name: MRT Red Line Westbound, distance: 232, to: R7, type: RAIL}
   # Blue Line
@@ -25,14 +25,14 @@ places:
     name: Gund Valley
     stations:
     - id: B1
-      name: Gund Valley MRT
+      name: Gund Valley MRT Blue
       connections:
       - {name: MRT Blue Line Southbound, distance: 262, to: B2, type: RAIL}
   northEdge:
     name: North Edge
     stations:
     - id: B2
-      name: North Edge MRT
+      name: North Edge MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 262, to: B1, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 431, to: B3, type: RAIL}
@@ -40,7 +40,7 @@ places:
     name: New Delvin
     stations:
     - id: B3
-      name: New Delvin MRT
+      name: New Delvin MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 431, to: B2, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 475, to: B4, type: RAIL}
@@ -48,7 +48,7 @@ places:
     name: Plainscity
     stations:
     - id: B4
-      name: Plaincscity MRT
+      name: Plaincscity MRT Blue
       connections:
       - {name: MRT Blue Line Westbound, distance: 475, to: B3, type: RAIL}
       - {name: MRT Blue Line Eastbound, distance: 378, to: B5, type: RAIL}
@@ -56,7 +56,7 @@ places:
     name: Woodzy Beach
     stations:
     - id: B5
-      name: Woodzy Beach MRT
+      name: Woodzy Beach MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 378, to: B4, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 606, to: B6, type: RAIL}
@@ -64,7 +64,7 @@ places:
     name: Welcomeville
     stations:
     - id: B6
-      name: Welcomeville MRT
+      name: Welcomeville MRT Blue
       connections:
       - {name: MRT Blue Line Westbound, distance: 606, to: B5, type: RAIL}
       - {name: MRT Blue Line Eastbound, distance: 314, to: B7, type: RAIL}
@@ -72,7 +72,7 @@ places:
     name: Shea-Jungle Resort
     stations:
     - id: B7
-      name: Shea-Jungle Resort MRT
+      name: Shea-Jungle Resort MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 314, to: B6, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 400, to: B8, type: RAIL}
@@ -80,7 +80,7 @@ places:
     name: Sandstone Fair
     stations:
     - id: B8
-      name: Sandstone Fair MRT
+      name: Sandstone Fair MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 400, to: B7, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 427, to: B9, type: RAIL}
@@ -88,7 +88,7 @@ places:
     name: Sublime
     stations:
     - id: B9
-      name: Sublime MRT
+      name: Sublime MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 427, to: B8, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 370, to: B10, type: RAIL}
@@ -96,7 +96,7 @@ places:
     name: MRT Marina
     stations:
     - id: B10
-      name: MRT Marina MRT
+      name: MRT Marina MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 370, to: B9, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 285, to: B11, type: RAIL}
@@ -104,7 +104,7 @@ places:
     name: Harbourfront District
     stations:
     - id: B11
-      name: Harbourfront District MRT
+      name: Harbourfront District MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 285, to: B10, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 286, to: B12, type: RAIL}
@@ -112,7 +112,7 @@ places:
     name: Government District
     stations:
     - id: B12
-      name: Government District MRT
+      name: Government District MRT Blue
       connections:
       - {name: MRT Blue Line Westbound, distance: 286, to: B11, type: RAIL}
       - {name: MRT Blue Line Eastbound, distance: 319, to: B13, type: RAIL}
@@ -120,7 +120,7 @@ places:
     name: Theatre District
     stations:
     - id: B14
-      name: Theatre District MRT
+      name: Theatre District MRT Blue
       connections:
       - {name: MRT Blue Line Northbound, distance: 213, to: B13, type: RAIL}
       - {name: MRT Blue Line Southbound, distance: 244, to: B15, type: RAIL}
