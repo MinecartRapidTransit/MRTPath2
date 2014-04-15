@@ -1,5 +1,9 @@
 package net.minecartrapidtransit.path.core;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -87,8 +91,9 @@ public class Pathfinder {
 		
 	}
 	
-	public static void main(String[] args){
-		Network network = new YamlDataStore().decodeNetwork(args[0]);
+	public static void main(String[] args) throws IOException {
+		
+		Network network = new YamlDataStore().decodeNetwork(readFile("res/mrtnetwork.yml", Charset.defaultCharset()));
 		Place p1 = network.getPlaceByID("greaterWestSpawn");
 		Place p2 = network.getPlaceByID("gundValley");
 		Route route = Pathfinder.getShortestRoute(network, p1, p2);
@@ -97,5 +102,12 @@ public class Pathfinder {
 			System.out.println(line);
 		}
 	}
+	
+	public static String readFile(String path, Charset encoding) 
+			  throws IOException 
+			{
+			  byte[] encoded = Files.readAllBytes(Paths.get(path));
+			  return new String(encoded, encoding);
+			}
 
 }
