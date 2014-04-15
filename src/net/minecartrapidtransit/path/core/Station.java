@@ -1,7 +1,6 @@
 package net.minecartrapidtransit.path.core;
 
- import java.util.ArrayList;
-import java.util.List;
+ import java.util.List;
 
 public class Station {
 
@@ -9,13 +8,6 @@ public class Station {
 	private String id;
 	private List<Connection> connections;
 	private Place place;
-	
-	public Station(String name, String id) {
-		super();
-		this.name = name;
-		this.id = id;
-		this.connections = new ArrayList<Connection>();
-	}
 	
 	/**
 	 * Constructs a new Station.

@@ -31,8 +31,7 @@ public class Pathfinder {
 			}
 			current.setVisited(true);
 			current = getNext(nn);
-			if (current != null)
-				c = current.getConnections();
+			c = current.getConnections();
 		}
 		
 		current = end;
