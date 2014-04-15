@@ -1,24 +1,27 @@
 package net.minecartrapidtransit.path.core;
 
 public class Step {
-	private String type;
-	private String data;
+	private Connection connection;
 	private NavNode from;
-	public Step(String type, String data, NavNode from){
-		this.type = type;
-		this.data = data;
+	public Step(NavNode from, Connection connection){
 		this.from = from;
+		this.connection = connection;
 	}
 	
 	public String getType(){
-		return type;
+		return connection.getType();
 	}
 	
 	public String getData(){
-		return data;
+		return connection.getName();
 	}
 	
-	public NavNode getNode(){
+	public NavNode getFrom(){
 		return from;
 	}
+	
+	public Station getTo(){
+		return connection.getDestination();
+	}
+
 }

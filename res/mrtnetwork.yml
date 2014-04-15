@@ -3,15 +3,22 @@ places:
   ARLI:
     name: Arlington
     stations:
-    - connections:
-      - {distance: 100, name: TFM Northbound, to: TFM-2, type: RAIL}
-      id: TFM-1
+    - id: TFM-1
       name: TFM District Arlington
+      connections:
+      - {name: TFM Northbound, distance: 100, to: TFM-2, type: RAIL}
+  CYTUS:
+    name: CYTUS
+    stations:
+    - id: TFM-2
+      name: TFM Disrict CYTUS
+      connections:
+      - {name: TFM Disrict Northbound, distance: 150, to: TFM-3, type: RAIL}
   RVTH:
     name: Redstone Valley TransHUB
     stations:
-    - connections:
-      - {distance: 100, name: TFM Southbound, to: TFM-1, type: RAIL}
-      id: TFM-2
+    - id: TFM-3
       name: TFM District Redstone Valley
+      connections:
+      - {name: TFM Southbound, distance: 100, to: TFM-2, type: RAIL}
 

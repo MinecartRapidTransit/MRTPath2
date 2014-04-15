@@ -1,7 +1,5 @@
 package net.minecartrapidtransit.path.core;
 
-import net.minecartrapidtransit.path.constants.S;
-
 public class Connection {
 
 	private String type;
@@ -21,17 +19,6 @@ public class Connection {
 		this.distance = distance;
 		this.name = name;
 		this.destination = destination;
-		if (this.type.equals(S.type_FOOT)) {
-			this.name = "";
-			this.distance = 100;
-		}
-		else if (this.type.equals(S.type_BUS) || this.type.equals(S.type_WARP)) {
-			this.distance = 1;
-		}
-		else if (this.type.equals(S.type_TRANSFER)) {
-			this.distance = 100;
-			this.name = destination.getName();
-		}
 	}
 
 	/**

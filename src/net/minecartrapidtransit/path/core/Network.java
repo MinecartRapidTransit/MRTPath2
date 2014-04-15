@@ -32,10 +32,10 @@ public class Network {
 	}
 	
 	/**
-	 * @returns an array of places.
+	 * @returns a List of places.
 	 */
-	public Place[] getPlacesArray() {
-		return (Place[]) places.values().toArray();
+	public List<Place> getPlacesList() {
+		return (List<Place>) new LinkedList<Place>(places.values());
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class Network {
 	
 	public List<Station> getStations(){
 		LinkedList<Station> list = new LinkedList<Station>();
-		for(Place place : getPlacesArray()){
+		for(Place place : getPlacesList()){
 			list.addAll(place.getStations());
 		}
 		return list;

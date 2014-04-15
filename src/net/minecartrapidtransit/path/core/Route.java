@@ -10,7 +10,7 @@ public class Route {
 	}
 	
 	public void addStep(Step step){
-		steps.add(steps.size(), step);
+		steps.add(0, step);
 	}
 	public void addStepToBack(Step step){
 		steps.add(step);
@@ -22,9 +22,15 @@ public class Route {
 	
 	public String[] getDirections(DirectionGenerator dg){
 		LinkedList<String> strings = new LinkedList<String>();
-		for(Step step : steps){
-			strings.add(dg.generateDirection(step));
+		for(int i = 0; i < steps.size(); i++){
+			String string;
+			if(i >= steps.size() - 1){
+				string = dg.generateDirection(steps.get(i), null);
+			}else{
+				string = dg.generateDirection(steps.get(i), steps.get(i+1));
+			}
+			if(string != null) strings.add(string);
 		}
-		return (String[]) strings.toArray();
+		return strings.toArray(new String[strings.size()]);
 	}
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecartrapidtransit.path.constants.S;
+import net.minecartrapidtransit.path.data.YamlDataStore;
+import net.minecartrapidtransit.path.directionGenerators.StandardDirectionGenerator;
 
 
 
@@ -16,12 +18,13 @@ public class Pathfinder {
 
 		if(pStart == null) return null;
 		if(pEnd == null) return null;
-		
+				
 		List<NavNode> nodes = new LinkedList<NavNode>();
 		// First get all Nodes
 		for(Station station : network.getStations()){
 			nodes.add(new NavNode(station));
 		}
+	
 		// Add special start and end place nodes
 		nodes.add(pStart.createStart()); // Has distance to start of 0
 		nodes.add(pEnd.createEnd());
@@ -36,11 +39,12 @@ public class Pathfinder {
 		while(nodes.size() > 0){
 			// Pick node with minimum distanceToStart (look at NavNode.compareTo() used by the min)
 			NavNode min =  Collections.min(nodes); // Because NavNode implements Comparable
-			nodes.remove(nodes.indexOf(min)); // Sets it as visited
 			if(min.getId().equals(S.id_END)){
 				// Woot we have found a smallest path.
 				break;
 			}
+			nodes.remove(nodes.indexOf(min)); // Sets it as visited
+
 			
 			// Now we look for connections
 			for(Connection connection : min.getConnections()){
@@ -49,33 +53,43 @@ public class Pathfinder {
 					if(destination.getDistanceToStart() == -1){
 						
 						destination.setDistanceToStart(connection.getDistance() + min.getDistanceToStart());
-						destination.setPrev(new Step(connection.getName(), connection.getType(), min));
+						destination.setPrev(new Step(min, connection));
 						
 					}else if(destination.getDistanceToStart() < connection.getDistance()){
 						
 						destination.setDistanceToStart(connection.getDistance() + min.getDistanceToStart());
-						destination.setPrev(new Step(connection.getName(), connection.getType(), min));
-						
+						destination.setPrev(new Step(min, connection));
 					} // Else do nothing
 				}
 			}
 			// And loop :D
 		}
-		
+
 		// By now either we have failed or found the smallest path.
 		if(nodes.size() == 0) return null; // Failure
 		
 		// Otherwise we can retrace our path from the finish into a Path object
 		Route route = new Route();
 		NavNode current = node_lookup.get(S.id_END);
-		while(!current.getId().equals(S.id_START)){
+		do{
 			route.addStep(current.getPrev());
-			current = current.getPrev().getNode();
-		}
+			current = current.getPrev().getFrom();
+		}while(!current.getId().equals(S.id_START));
 		
 		
 		return route;
 		
+	}
+	
+	public static void main(String[] args){
+		Network network = new YamlDataStore().decodeNetwork(args[0]);
+		Place p1 = network.getPlaceByID("ARLI");
+		Place p2 = network.getPlaceByID("RVTH");
+		Route route = Pathfinder.getShortestRoute(network, p1, p2);
+		String[] results = route.getDirections(new StandardDirectionGenerator());
+		for(String line : results){
+			System.out.println(line);
+		}
 	}
 
 }
