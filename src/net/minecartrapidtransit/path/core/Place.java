@@ -1,6 +1,5 @@
 package net.minecartrapidtransit.path.core;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -60,28 +59,6 @@ public class Place {
 		}
 		stations.add(station);
 	}
-	
-	public List<Connection> getConnections() {
-		List<Connection> l = new ArrayList<Connection>();
-		for(Station s : stations){
-			for (Connection c : s.getConnections()) {
-				l.add(c);
-			}
-		}
-		return l;
-	}
-	
-	public List<Connection> getConnectionsWithoutTransfer() {
-		List<Connection> l = new ArrayList<Connection>();
-		for(Station s : stations){
-			for (Connection c : s.getConnections()) {
-				if (!c.getType().equals(S.type_TRANSFER)) {
-					l.add(c);
-				}
-			}
-		}
-		return l;
-	}
 
 	/**
 	 * @return the stations
@@ -109,6 +86,24 @@ public class Place {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public NavNode createStart(){
+		LinkedList<Connection> connections = new LinkedList<Connection>();
+		for(Station station : stations){
+			connections.add(new Connection(S.type_FOOT, 1, station.getName(), station));
+		}
+		NavNode nav = new NavNode(new Station(name, S.id_START, connections));
+		nav.setDistanceToStart(0);
+		return nav;
+	}
+	
+	public NavNode createEnd(){
+		Station endStation = new Station(name, S.id_END, new LinkedList<Connection>());
+		for(Station station : stations){
+			station.addConnection(new Connection(S.type_FOOT, 1, name, endStation));
+		}
+		return new NavNode(endStation);
 	}
 }
 

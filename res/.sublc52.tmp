@@ -1,0 +1,131 @@
+!network
+places:
+  # MRT Transfer First
+  spawn:
+    name: Spawn Station
+    stations:
+    - id: B13
+      name: Spawn Station MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 286, to: B12, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 213, to: B14, type: RAIL}
+    - id: R7
+      name: Spawn Station MRT
+      connections:
+      - {name: MRT Red Line Eastbound, distance: 232, to: R6, type: RAIL}
+  greaterWestSpawn:
+    name: Greater West Spawn
+    - id: R6
+      name: Greater West Spawn MRT      
+  # Blue Line
+  gundValley:
+    name: Gund Valley
+    stations:
+    - id: B1
+      name: Gund Valley MRT
+      connections:
+      - {name: MRT Blue Line Southbound, distance: 262, to: B2, type: RAIL}
+  northEdge:
+    name: North Edge
+    stations:
+    - id: B2
+      name: North Edge MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 262, to: B1, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 431, to: B3, type: RAIL}
+  newDelvin:
+    name: New Delvin
+    stations:
+    - id: B3
+      name: New Delvin MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 431, to: B2, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 475, to: B4, type: RAIL}
+  plainscity:
+    name: Plainscity
+    stations:
+    - id: B4
+      name: Plaincscity MRT
+      connections:
+      - {name: MRT Blue Line Westbound, distance: 475, to: B3, type: RAIL}
+      - {name: MRT Blue Line Eastbound, distance: 378, to: B5, type: RAIL}
+  woodzyBeach:
+    name: Woodzy Beach
+    stations:
+    - id: B5
+      name: Woodzy Beach MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 378, to: B4, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 606, to: B6, type: RAIL}
+  welcomeville:
+    name: Welcomeville
+    stations:
+    - id: B6
+      name: Welcomeville MRT
+      connections:
+      - {name: MRT Blue Line Westbound, distance: 606, to: B5, type: RAIL}
+      - {name: MRT Blue Line Eastbound, distance: 314, to: B7, type: RAIL}
+  sheaJungleResort:
+    name: Shea-Jungle Resort
+    stations:
+    - id: B7
+      name: Shea-Jungle Resort MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 314, to: B6, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 400, to: B8, type: RAIL}
+  sandstoneFair:
+    name: Sandstone Fair
+    stations:
+    - id: B8
+      name: Sandstone Fair MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 400, to: B7, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 427, to: B9, type: RAIL}
+  sublime:
+    name: Sublime
+    stations:
+    - id: B9
+      name: Sublime MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 427, to: B8, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 370, to: B10, type: RAIL}
+  mrtMarina:
+    name: MRT Marina
+    stations:
+    - id: B10
+      name: MRT Marina MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 370, to: B9, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 285, to: B11, type: RAIL}
+  harbourfrontDistrict:
+    name: Harbourfront District
+    stations:
+    - id: B11
+      name: Harbourfront District MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 285, to: B10, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 286, to: B12, type: RAIL}
+  governmentDistrict:
+    name: Government District
+    stations:
+    - id: B12
+      name: Government District MRT
+      connections:
+      - {name: MRT Blue Line Westbound, distance: 286, to: B11, type: RAIL}
+      - {name: MRT Blue Line Eastbound, distance: 319, to: B13, type: RAIL}
+  theatreDistrict:
+    name: Theatre District
+    - id: B14
+      name: Theatre District MRT
+      connections:
+      - {name: MRT Blue Line Northbound, distance: 213, to: B13, type: RAIL}
+      - {name: MRT Blue Line Southbound, distance: 244, to: B15, type: RAIL}
+
+# # Do Not Copy beneath this Line (temp)
+    # name: 
+    # stations:
+    # - id: B
+    #   name: 
+    #   connections:
+    #   - {name: MRT Blue Line Northbound, distance: , to: B, type: RAIL}
+    #   - {name: MRT Blue Line Southbound, distance: , to: B, type: RAIL}

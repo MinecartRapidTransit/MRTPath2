@@ -1,6 +1,8 @@
 package net.minecartrapidtransit.path.core;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class Network {
@@ -30,10 +32,10 @@ public class Network {
 	}
 	
 	/**
-	 * @returns an array of places.
+	 * @returns a List of places.
 	 */
-	public Place[] getPlacesArray() {
-		return (Place[]) places.values().toArray();
+	public List<Place> getPlacesList() {
+		return (List<Place>) new LinkedList<Place>(places.values());
 	}
 
 	/**
@@ -48,5 +50,13 @@ public class Network {
 	 */
 	public void setPlaces(Map<String, Place> places) {
 		this.places = places;
+	}
+	
+	public List<Station> getStations(){
+		LinkedList<Station> list = new LinkedList<Station>();
+		for(Place place : getPlacesList()){
+			list.addAll(place.getStations());
+		}
+		return list;
 	}
 }

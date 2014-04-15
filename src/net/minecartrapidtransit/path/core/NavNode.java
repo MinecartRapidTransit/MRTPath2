@@ -1,29 +1,20 @@
 package net.minecartrapidtransit.path.core;
 
+public class NavNode extends Station implements Comparable<NavNode> {
 
-public class NavNode extends Place {
-
-	private boolean visited;
 	private int distanceToStart;
-	private NavNode prev;
+	private Step prev;
 
 	/**
 	 * Constructs a new NavNode.
 	 * @param p The place represented by this NavNode.
 	 */
-	public NavNode(Place p) {
-		super(p.getName(), p.getId());
-		visited = false;
+	public NavNode(Station s) {
+		super(s.getName(), s.getId(), s.getConnections());
 		distanceToStart = -1;
 		prev = null;
 	}
 
-	/**
-	 * @return true, if NavNode is already visited, else false.
-	 */
-	public boolean isVisited() {
-		return visited;
-	}
 
 	/**
 	 * @return the distance to the starting NavNode.
@@ -35,16 +26,10 @@ public class NavNode extends Place {
 	/**
 	 * @return the prev
 	 */
-	public NavNode getPrev() {
+	public Step getPrev() {
 		return prev;
 	}
 
-	/**
-	 * @param visited true, if this node was visited, else false.
-	 */
-	public void setVisited(boolean visited) {
-		this.visited = visited;
-	}
 
 	/**
 	 * @param distanceToStart the distance to the starting NavNode
@@ -56,7 +41,22 @@ public class NavNode extends Place {
 	/**
 	 * @param prev the previous NavNode.
 	 */
-	public void setPrev(NavNode prev) {
+	public void setPrev(Step prev) {
 		this.prev = prev;
+	}
+
+	@Override
+	public int compareTo(NavNode o) {
+		boolean a = distanceToStart == -1;
+		boolean b = o.getDistanceToStart() == -1;
+		if(a & b){
+			return 0;
+		}else if(a){
+			return 1;
+		}else if(b)
+			return -1;
+		else{
+			return Integer.compare(distanceToStart, o.getDistanceToStart());
+		}
 	}
 }

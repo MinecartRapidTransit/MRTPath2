@@ -1,82 +1,113 @@
 package net.minecartrapidtransit.path.core;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import net.minecartrapidtransit.path.constants.S;
+import net.minecartrapidtransit.path.data.YamlDataStore;
+import net.minecartrapidtransit.path.directionGenerators.StandardDirectionGenerator;
+
 
 
 public class Pathfinder {
 
-	public static Path getShortestRoute(List<Place> places, Place pStart, Place pEnd) {
-		NavNode start = new NavNode(pStart);
-		NavNode end = new NavNode(pEnd);
-		NavNode current = start;
+	public static Route getShortestRoute(Network network, Place pStart, Place pEnd) {
+
+		if(pStart == null) return null;
+		if(pEnd == null) return null;
+				
+		List<NavNode> nodes = new LinkedList<NavNode>();
+		// First get all Nodes
+		for(Station station : network.getStations()){
+			nodes.add(new NavNode(station));
+		}
+	
+		// Add special start and end place nodes
+		nodes.add(pStart.createStart()); // Has distance to start of 0
+		nodes.add(pEnd.createEnd());
 		
-		if (start == null || end == null)
-			return null;
-		start.setDistanceToStart(0);
-		
-		List<NavNode> nn = new ArrayList<NavNode>();
-		for (Place curr : places) {
-			nn.add(new NavNode(curr));
+		// Finally we need a map (for lookup)
+		Map<String, NavNode> node_lookup = new HashMap<String, NavNode>();
+		for(NavNode node : nodes){
+			node_lookup.put(node.getId(), node);
 		}
 		
-		List<Connection> c = current.getConnectionsWithoutTransfer();
-		
-		while (current != null && current != end) {
-			for (Connection curr : c) {
-				if(findNavNodeByPlace(curr.getDestination().getPlace(), nn).getDistanceToStart() == -1 || findNavNodeByPlace(curr.getDestination().getPlace(), nn).getDistanceToStart() > (current.getDistanceToStart() + curr.getDistance())) {
-					findNavNodeByPlace(curr.getDestination().getPlace(), nn).setDistanceToStart(current.getDistanceToStart() + curr.getDistance());
-					findNavNodeByPlace(curr.getDestination().getPlace(), nn).setPrev(current);
+		// Ok It is Algorithm time
+		while(nodes.size() > 0){
+			// Pick node with minimum distanceToStart (look at NavNode.compareTo() used by the min)
+			NavNode min =  Collections.min(nodes); // Because NavNode implements Comparable
+			if(min.getId().equals(S.id_END)){
+				// Woot we have found a smallest path.
+				break;
+			}
+
+			nodes.remove(nodes.indexOf(min)); // Sets it as visited
+
+			
+			// Now we look for connections
+			for(Connection connection : min.getConnections()){
+				NavNode destination;
+				try{
+					destination = node_lookup.get(connection.getDestination().getId());
+				}catch(NullPointerException e){
+					continue;
+				}
+				if(nodes.contains(destination)){ // If it is not visited
+					if(destination.getDistanceToStart() == -1){
+						
+						destination.setDistanceToStart(connection.getDistance() + min.getDistanceToStart());
+						destination.setPrev(new Step(min, connection));
+						
+					}else if(destination.getDistanceToStart() < connection.getDistance()){
+						
+						destination.setDistanceToStart(connection.getDistance() + min.getDistanceToStart());
+						destination.setPrev(new Step(min, connection));
+					} // Else do nothing
 				}
 			}
-			current.setVisited(true);
-			current = getNext(nn);
-			c = current.getConnections();
+			// And loop :D
 		}
+
+		// By now either we have failed or found the smallest path.
+		if(nodes.size() == 0) return null; // Failure
 		
-		current = end;
-		String temp = "";
-		while (current != start) {
-			temp = "-" + findConnectionByNavNode(current.getPrev().getConnections(), current).getType() + "," + findConnectionByNavNode(current.getPrev().getConnections(), current).getName() + "-" + current.getId() + temp;
-			current = current.getPrev();
-		}
+		// Otherwise we can retrace our path from the finish into a Path object
+		Route route = new Route();
+		NavNode current = node_lookup.get(S.id_END);
+		do{
+			route.addStep(current.getPrev());
+			current = current.getPrev().getFrom();
+		}while(!current.getId().equals(S.id_START));
 		
-		return new Path(temp, places);
+		
+		return route;
+		
 	}
 	
-	private static NavNode findNavNodeByPlace(Place p, List<NavNode> pN) {
-		for (NavNode n : pN) {
-			if (n.getId().equals(p.getId())) {
-				return n;
-			}
+	public static void main(String[] args) throws IOException {
+		
+		Network network = new YamlDataStore().decodeNetwork(readFile("res/mrtnetwork.yml", Charset.defaultCharset()));
+		Place p1 = network.getPlaceByID("greaterWestSpawn");
+		Place p2 = network.getPlaceByID("gundValley");
+		Route route = Pathfinder.getShortestRoute(network, p1, p2);
+		String[] results = route.getDirections(new StandardDirectionGenerator());
+		for(String line : results){
+			System.out.println(line);
 		}
-		return null;
 	}
 	
-	private static NavNode getNext(List<NavNode> pN) {
-		int shortest = -1;
-		NavNode next = null;
-		for (NavNode n : pN) {
-			if (n.getDistanceToStart() != -1 && !n.isVisited()) {
-				if (shortest == -1 || shortest == 0) {
-					shortest = n.getDistanceToStart();
-					next = n;
-				}
-				else if (n.getDistanceToStart() < shortest) {
-					shortest = n.getDistanceToStart();
-					next = n;
-				}
+	public static String readFile(String path, Charset encoding) 
+			  throws IOException 
+			{
+			  byte[] encoded = Files.readAllBytes(Paths.get(path));
+			  return new String(encoded, encoding);
 			}
-		}
-		return next;
-	}
-	
-	private static Connection findConnectionByNavNode(List<Connection> pC, NavNode dest) {
-		for (Connection c : pC) {
-			if (c.getDestination().equals(dest)) {
-				return c;
-			}
-		}
-		return null;
-	}
+
 }
