@@ -65,7 +65,7 @@ public class Pathfinder {
 						destination.setDistanceToStart(connection.getDistance() + min.getDistanceToStart());
 						destination.setPrev(new Step(min, connection));
 						
-					}else if(destination.getDistanceToStart() < connection.getDistance()){
+					}else if(destination.getDistanceToStart() > connection.getDistance()){
 						
 						destination.setDistanceToStart(connection.getDistance() + min.getDistanceToStart());
 						destination.setPrev(new Step(min, connection));

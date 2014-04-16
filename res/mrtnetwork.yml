@@ -19,7 +19,7 @@ places:
     - id: R6
       name: Red Line, Greater West Spawn MRT
       connections:
-      - {name: MRT Red Line towards Gund Valley, distance: 232, to: R7, type: RAIL}
+      - {name: MRT Red Line towards RedTerminus, distance: 232, to: R7, type: RAIL}
   # Blue Line
   gundValley:
     name: Gund Valley
