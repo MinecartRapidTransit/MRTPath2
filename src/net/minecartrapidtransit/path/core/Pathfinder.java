@@ -93,7 +93,7 @@ public class Pathfinder {
 	
 	public static void main(String[] args) throws IOException {
 		
-		Network network = new YamlDataStore().decodeNetwork(readFile("res/mrtnetwork.yml", Charset.defaultCharset()));
+		Network network = new YamlDataStore().decodeNetwork(YamlDataStore.readFile("res/mrtnetwork.yml", Charset.defaultCharset()));
 		Place p1 = network.getPlaceByID("greaterWestSpawn");
 		Place p2 = network.getPlaceByID("welcomeville");
 		Route route = Pathfinder.getShortestRoute(network, p1, p2);
@@ -103,11 +103,6 @@ public class Pathfinder {
 		}
 	}
 	
-	public static String readFile(String path, Charset encoding) 
-			  throws IOException 
-			{
-			  byte[] encoded = Files.readAllBytes(Paths.get(path));
-			  return new String(encoded, encoding);
-			}
+
 
 }
