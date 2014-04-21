@@ -12,7 +12,7 @@ public class NetworkEditor extends JFrame {
 	
 	private void initUi(){
 		setSize(400, 500);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
