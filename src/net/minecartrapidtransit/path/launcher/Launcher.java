@@ -1,7 +1,10 @@
 package net.minecartrapidtransit.path.launcher;
 
 import java.awt.BorderLayout;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -54,6 +57,7 @@ public class Launcher extends JFrame {
 			// Now we can check if each file is up to date
 			FileStoreUtils fsu = new FileStoreUtils(S.files);
 			updateFile(fsu, S.jar);
+			updateFile(fsu, S.gui);
 		}catch(Exception e){
 			e.printStackTrace();
 			JOptionPane.showConfirmDialog(null, "There was a problem downloading the file. This may have been caused by us or by"
@@ -63,9 +67,16 @@ public class Launcher extends JFrame {
 	}
 	
 	private void launchJar() throws IOException, InterruptedException {
-		Process i = Runtime.getRuntime().exec(String.format("java -cp \"%s/*\" %s", FileStoreUtils.getDataFolderPath(), S.main_class));
+		String classpath = FileStoreUtils.getDataFilePath(S.jar) + File.pathSeparator + FileStoreUtils.getDataFilePath(S.gui);
+		Process i = Runtime.getRuntime().exec(String.format("java -cp \"%s\" %s", classpath, S.main_class));
 		setVisible(false);
-		i.waitFor();
+		String line;
+		BufferedReader in = new BufferedReader(
+				new InputStreamReader(i.getInputStream()) );
+		while ((line = in.readLine()) != null) {
+			System.out.println(line);
+		}
+		in.close();
 		if(i.exitValue() != 0) throw new IOException("Failed launch");
 	}
 	
