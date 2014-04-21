@@ -24,6 +24,7 @@ public class Downloader {
 			url = new URL(iNetLoc);
 			con = (HttpURLConnection) url.openConnection();
 			File file = new File(saveLoc);
+			file.getParentFile().mkdirs();
 			BufferedInputStream bis = new BufferedInputStream(con.getInputStream());
 			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 			int filesize = con.getContentLength();
