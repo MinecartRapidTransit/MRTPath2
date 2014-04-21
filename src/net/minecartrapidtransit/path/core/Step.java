@@ -23,5 +23,9 @@ public class Step {
 	public Station getTo(){
 		return connection.getDestination();
 	}
+	
+	public Connection getConnection(){
+		return connection;
+	}
 
 }

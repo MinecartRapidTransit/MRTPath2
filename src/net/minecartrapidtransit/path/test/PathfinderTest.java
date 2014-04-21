@@ -16,6 +16,9 @@ public class PathfinderTest {
 	public void testPrefersShorterPaths() throws IOException {
 		Network network = new YamlDataStore().decodeNetwork(
 				YamlDataStore.readFile("res/test/pathfinderTestYaml.yml", Charset.defaultCharset()));
+		Route route = Pathfinder.getShortestRoute(network, network.getPlaceByID("a"), network.getPlaceByID("b"));
+		String connection = route.getSteps().get(1).getConnection().getName();
+		assertEquals("Good", connection);
 	}
 
 }

@@ -4,3 +4,4 @@
 *.jar
 !lib/*.jar
 bin/*
+/bin
