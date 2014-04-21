@@ -68,14 +68,15 @@ public class Launcher extends JFrame {
 	
 	private void launchJar() throws IOException, InterruptedException {
 		String classpath = FileStoreUtils.getDataFilePath(S.jar) + File.pathSeparator + FileStoreUtils.getDataFilePath(S.gui);
-		Process i = Runtime.getRuntime().exec(String.format("java -cp \"%s\" %s", classpath, S.main_class));
+		Process i = Runtime.getRuntime().exec(new String[]{"java", "-cp", classpath, S.main_class});
 		setVisible(false);
 		String line;
 		BufferedReader in = new BufferedReader(
-				new InputStreamReader(i.getInputStream()) );
+				new InputStreamReader(i.getInputStream()));
 		while ((line = in.readLine()) != null) {
 			System.out.println(line);
 		}
+		i.waitFor();
 		in.close();
 		if(i.exitValue() != 0) throw new IOException("Failed launch");
 	}
