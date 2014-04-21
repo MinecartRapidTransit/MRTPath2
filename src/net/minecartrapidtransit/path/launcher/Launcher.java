@@ -58,6 +58,7 @@ public class Launcher extends JFrame {
 			FileStoreUtils fsu = new FileStoreUtils(S.files);
 			updateFile(fsu, S.jar);
 			updateFile(fsu, S.gui);
+			updateFile(fsu, S.yaml);
 		}catch(Exception e){
 			e.printStackTrace();
 			JOptionPane.showConfirmDialog(null, "There was a problem downloading the file. This may have been caused by us or by"
@@ -76,8 +77,9 @@ public class Launcher extends JFrame {
 		while ((line = in.readLine()) != null) {
 			System.out.println(line);
 		}
-		i.waitFor();
 		in.close();
+		i.waitFor();
+		System.exit(0);
 		if(i.exitValue() != 0) throw new IOException("Failed launch");
 	}
 	
