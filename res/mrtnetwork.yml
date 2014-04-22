@@ -1,4 +1,23 @@
+---
+!places
+name: Main
+places:
+  foo: Foo
+  bar: Bar
+
+# etc.
+# ---
+# !line
+# name: FooBar line
+# stations:
+#   - place: gundValley
+#     id: B1
+#     name: Blue Line, Gund Valley MRT
+#     connections:
+#     - {name: MRT Blue Line towards Cactusville, distance: 262, to: B2, type: RAIL}
+---
 !network
+name: MRT
 places:
   # MRT Transfer First
   spawn:

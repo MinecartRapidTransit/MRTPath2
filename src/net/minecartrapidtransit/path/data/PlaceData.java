@@ -8,7 +8,9 @@ import net.minecartrapidtransit.path.core.Station;
 
 public class PlaceData {
 	
-	public PlaceData() {} // For javabean spec
+	public PlaceData() {
+		stations = new LinkedList<StationData>();
+	} // For javabean spec
 	public PlaceData(Place place){
 		this.name = place.getName();
 		this.stations = new LinkedList<StationData>();

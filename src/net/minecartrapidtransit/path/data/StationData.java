@@ -69,5 +69,14 @@ public class StationData {
 		this.connections = connections;
 	}
 	
+	public LineStationData toLineStationData(String place){
+		LineStationData lsd = new LineStationData();
+		lsd.setConnections(connections);
+		lsd.setId(id);
+		lsd.setName(name);
+		lsd.setPlace(place);
+		return lsd;
+	}
+	
 	
 }
