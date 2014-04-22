@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import net.minecartrapidtransit.path.gui.S;
 
+@SuppressWarnings("serial")
 public class NetworkEditor extends JFrame {
 	public NetworkEditor(){
 		super(S.networkEditor);
