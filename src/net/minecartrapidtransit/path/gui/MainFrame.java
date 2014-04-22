@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -123,7 +126,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	private void addNetworkToLists() {
-		for (Place p : n.getPlacesList()) {
+		List<Place> places = n.getPlacesList();
+		Collections.sort(places, new PlaceComparatorByName());
+		for (Place p : places) {
 			lm1.addElement(p.getName());
 			lm2.addElement(p.getName());
 		}
@@ -136,6 +141,15 @@ public class MainFrame extends JFrame implements ActionListener {
 			if(source.getText().equals(S.networkEditor)){
 		        new NetworkEditor();
 			}
+		}
+		
+	}
+	
+	private class PlaceComparatorByName implements Comparator<Place>{
+
+		@Override
+		public int compare(Place o1, Place o2) {
+			return o1.getName().compareTo(o2.getName());
 		}
 		
 	}
