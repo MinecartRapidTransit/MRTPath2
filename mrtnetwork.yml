@@ -1,0 +1,135 @@
+!network
+places:
+  # MRT Transfer First
+  spawn:
+    name: Spawn Station
+    stations:
+    - id: B13
+      name: Blue Line, Spawn Station MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 286, to: B12, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 213, to: B14, type: RAIL}
+    - id: R7
+      name: Red Line, Spawn Station MRT
+      connections:
+      - {name: MRT Red Line towards Cactusville, distance: 232, to: R6, type: RAIL}
+  greaterWestSpawn:
+    name: Greater West Spawn
+    stations:
+    - id: R6
+      name: Red Line, Greater West Spawn MRT
+      connections:
+      - {name: MRT Red Line towards RedTerminus, distance: 232, to: R7, type: RAIL}
+  # Blue Line
+  gundValley:
+    name: Gund Valley
+    stations:
+    - id: B1
+      name: Blue Line, Gund Valley MRT
+      connections:
+      - {name: MRT Blue Line towards Cactusville, distance: 262, to: B2, type: RAIL}
+  northEdge:
+    name: North Edge
+    stations:
+    - id: B2
+      name: Blue Line, North Edge MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 262, to: B1, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 431, to: B3, type: RAIL}
+  newDelvin:
+    name: New Delvin
+    stations:
+    - id: B3
+      name: Blue Line, New Delvin MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 431, to: B2, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 475, to: B4, type: RAIL}
+  plainscity:
+    name: Plainscity
+    stations:
+    - id: B4
+      name: Blue Line, Plaincscity MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 475, to: B3, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 378, to: B5, type: RAIL}
+  woodzyBeach:
+    name: Woodzy Beach
+    stations:
+    - id: B5
+      name: Blue Line, Woodzy Beach MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 378, to: B4, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 606, to: B6, type: RAIL}
+  welcomeville:
+    name: Welcomeville
+    stations:
+    - id: B6
+      name: Blue Line, Welcomeville MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 606, to: B5, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 314, to: B7, type: RAIL}
+  sheaJungleResort:
+    name: Shea-Jungle Resort
+    stations:
+    - id: B7
+      name: Blue Line, Shea-Jungle Resort MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 314, to: B6, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 400, to: B8, type: RAIL}
+  sandstoneFair:
+    name: Sandstone Fair
+    stations:
+    - id: B8
+      name: Blue Line, Sandstone Fair MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 400, to: B7, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 427, to: B9, type: RAIL}
+  sublime:
+    name: Sublime
+    stations:
+    - id: B9
+      name: Blue Line, Sublime MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 427, to: B8, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 370, to: B10, type: RAIL}
+  mrtMarina:
+    name: MRT Blue Marina
+    stations:
+    - id: B10
+      name: Blue Line, MRT Blue Marina MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 370, to: B9, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 285, to: B11, type: RAIL}
+  harbourfrontDistrict:
+    name: Harbourfront District
+    stations:
+    - id: B11
+      name: Blue Line, Harbourfront District MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 285, to: B10, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 286, to: B12, type: RAIL}
+  governmentDistrict:
+    name: Government District
+    stations:
+    - id: B12
+      name: Blue Line, Government District MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 286, to: B11, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 319, to: B13, type: RAIL}
+  theatreDistrict:
+    name: Theatre District
+    stations:
+    - id: B14
+      name: Blue Line, Theatre District MRT
+      connections:
+      - {name: MRT Blue Line towards Gund Valley, distance: 213, to: B13, type: RAIL}
+      - {name: MRT Blue Line towards Cactusville, distance: 244, to: B15, type: RAIL}
+
+# # Do Not Copy beneath this Line (temp)
+    # name: 
+    # stations:
+    # - id: B
+    #   name: 
+    #   connections:
+    #   - {name: MRT Blue Line towards Gund Valley, distance: , to: B, type: RAIL}
+    #   - {name: MRT Blue Line towards Cactusville, distance: , to: B, type: RAIL}

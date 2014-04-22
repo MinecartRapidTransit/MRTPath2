@@ -11,4 +11,13 @@ public class S {
 	
 	public static int mnuToolsShortcut = KeyEvent.VK_T;
 	public static int mniNetworkEditorShourtcut = KeyEvent.VK_N;
+	
+	//MainFrame Constants
+	public static final String lblStn1 = "Please select your start:";
+	public static final String lblStn2 = "Please select your destination:";
+	public static final String btnSearch = "Search";
+	//public static final String placeSeperator = ": ";
+	
+	//Path constants
+	public static final String networkPath = "./mrtnetwork.yml";
 }
