@@ -19,5 +19,5 @@ public class S {
 	//public static final String placeSeperator = ": ";
 	
 	//Path constants
-	public static final String networkPath = "./mrtnetwork.yml";
+	public static final String networkPath = "mrtnetwork.yml";
 }

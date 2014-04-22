@@ -56,7 +56,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		yaml = new YamlDataStore();
 		
 		try {
-			n = yaml.decodeNetwork(YamlDataStore.readFile(S.networkPath, Charset.defaultCharset()));
+			n = yaml.decodeNetwork(YamlDataStore.readFile(FileStoreUtils.getDataFilePath(S.networkPath), Charset.defaultCharset()));
 		} catch (IOException e) {
 			n = null;
 			JOptionPane.showMessageDialog(getContentPane(), "No valid .yml found in '"+ S.networkPath + "'!", "Error", JOptionPane.ERROR_MESSAGE);
