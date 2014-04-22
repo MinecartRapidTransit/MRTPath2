@@ -79,8 +79,9 @@ public class Launcher extends JFrame {
 		}
 		in.close();
 		i.waitFor();
-		System.exit(0);
 		if(i.exitValue() != 0) throw new IOException("Failed launch");
+		System.exit(0);
+
 	}
 	
 	private void updateFile(String inet, String file) throws IOException {
