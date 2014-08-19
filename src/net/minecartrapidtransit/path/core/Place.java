@@ -3,7 +3,7 @@ package net.minecartrapidtransit.path.core;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecartrapidtransit.path.constants.S;
+import net.minecartrapidtransit.path.constants.C;
 
 public class Place {
 	private List<Station> stations;
@@ -54,8 +54,8 @@ public class Place {
 	public void addStation(Station station){
 		station.setPlace(this);
 		for(Station otherStation : stations){
-			otherStation.addConnection(new Connection(S.type_TRANSFER, 10, null, station));
-			station.addConnection(new Connection(S.type_TRANSFER, 10, null, otherStation));
+			otherStation.addConnection(new Connection(C.type_TRANSFER, C.transfer_cost, null, station));
+			station.addConnection(new Connection(C.type_TRANSFER, C.transfer_cost, null, otherStation));
 		}
 		stations.add(station);
 	}
@@ -91,17 +91,17 @@ public class Place {
 	public NavNode createStart(){
 		LinkedList<Connection> connections = new LinkedList<Connection>();
 		for(Station station : stations){
-			connections.add(new Connection(S.type_FOOT, 1, station.getName(), station));
+			connections.add(new Connection(C.type_FOOT, 1, station.getName(), station));
 		}
-		NavNode nav = new NavNode(new Station(name, S.id_START, connections));
+		NavNode nav = new NavNode(new Station(name, C.id_START, connections));
 		nav.setDistanceToStart(0);
 		return nav;
 	}
 	
 	public NavNode createEnd(){
-		Station endStation = new Station(name, S.id_END, new LinkedList<Connection>());
+		Station endStation = new Station(name, C.id_END, new LinkedList<Connection>());
 		for(Station station : stations){
-			station.addConnection(new Connection(S.type_FOOT, 1, name, endStation));
+			station.addConnection(new Connection(C.type_FOOT, 1, name, endStation));
 		}
 		return new NavNode(endStation);
 	}

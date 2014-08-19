@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import net.minecartrapidtransit.path.constants.S;
+import net.minecartrapidtransit.path.constants.C;
 import net.minecartrapidtransit.path.data.YamlDataStore;
 import net.minecartrapidtransit.path.directionGenerators.StandardDirectionGenerator;
 
@@ -41,7 +41,7 @@ public class Pathfinder {
 		while(nodes.size() > 0){
 			// Pick node with minimum distanceToStart (look at NavNode.compareTo() used by the min)
 			NavNode min =  Collections.min(nodes); // Because NavNode implements Comparable
-			if(min.getId().equals(S.id_END)){
+			if(min.getId().equals(C.id_END)){
 				// Woot we have found a smallest path.
 				break;
 			}
@@ -78,11 +78,11 @@ public class Pathfinder {
 		
 		// Otherwise we can retrace our path from the finish into a Path object
 		Route route = new Route();
-		NavNode current = node_lookup.get(S.id_END);
+		NavNode current = node_lookup.get(C.id_END);
 		do{
 			route.addStep(current.getPrev());
 			current = current.getPrev().getFrom();
-		}while(!current.getId().equals(S.id_START));
+		}while(!current.getId().equals(C.id_START));
 		
 		
 		return route;
