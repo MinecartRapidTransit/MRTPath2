@@ -7,7 +7,7 @@ public class StandardDirectionGenerator implements DirectionGenerator {
 		
 	@Override
 	public String generateDirection(Step current, Step next) {
-		// System.out.printf("%s: %s\n", current.getType(), current.getTo().getId()); // Used for debug
+//		System.out.printf("%s: %s\n", current.getType(), current.getTo().getId()); // Used for debug
 		if (current.getType().equals(S.type_FOOT)) {
 			if(current.getFrom().getId().equals(S.id_START)){
 				return String.format("Walk to the %s.", current.getData());
@@ -18,7 +18,9 @@ public class StandardDirectionGenerator implements DirectionGenerator {
 			}
 		}
 		else if (current.getType().equals(S.type_RAIL)) {
-			
+			if(next.getType().equals(S.type_TRANSFER) || next.getType().equals(S.type_FOOT)){
+				return String.format("Ride the %s until you reach %s.", current.getData(), current.getTo().getPlace().getName());
+			}
 		}
 		else if (current.getType().equals(S.type_HSRAIL)) {
 			if(next.getType().equals(S.type_TRANSFER) || next.getType().equals(S.type_FOOT)){

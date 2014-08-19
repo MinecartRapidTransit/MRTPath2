@@ -7,15 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.minecartrapidtransit.path.constants.S;
-import net.minecartrapidtransit.path.core.Connection;
 import net.minecartrapidtransit.path.core.Network;
-import net.minecartrapidtransit.path.core.Place;
-import net.minecartrapidtransit.path.core.Station;
 
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
@@ -80,26 +75,26 @@ public class YamlDataStore implements DataFormat {
 			  return new String(encoded, encoding);
 			}
 	
-	//TODO remove this
-	public static void main(String args[]){
-		Network network = new Network();
-		Place place1 = new Place("ARLI", "Arlington");
-		Station station1 = new Station("TFM District Arlington", "TFM-1", new LinkedList<Connection>());
-		Place place2 = new Place("RVTH", "Redstone Valley TransHUB");
-		Station station2 = new Station("TFM District Redstone Valley", "TFM-2", new LinkedList<Connection>());
-		Connection connection1 = new Connection(S.type_RAIL, 100, "TFM Northbound", station2);
-		Connection connection2 = new Connection(S.type_RAIL, 100, "TFM Southbound", station1);
-		
-		station1.addConnection(connection1);
-		station2.addConnection(connection2);
-		place1.addStation(station1);
-		place2.addStation(station2);
-		network.addPlace(place1);
-		network.addPlace(place2);
-		String yaml = new YamlDataStore().encodeNetwork(network);
-		Network net2 = new YamlDataStore().decodeNetwork(yaml);
-		String yaml2 = new YamlDataStore().encodeNetwork(net2);
-		System.out.println(yaml2);
-		
-	}
+//	//TODO remove this
+//	public static void main(String args[]){
+//		Network network = new Network();
+//		Place place1 = new Place("ARLI", "Arlington");
+//		Station station1 = new Station("TFM District Arlington", "TFM-1", new LinkedList<Connection>());
+//		Place place2 = new Place("RVTH", "Redstone Valley TransHUB");
+//		Station station2 = new Station("TFM District Redstone Valley", "TFM-2", new LinkedList<Connection>());
+//		Connection connection1 = new Connection(S.type_RAIL, 100, "TFM Northbound", station2);
+//		Connection connection2 = new Connection(S.type_RAIL, 100, "TFM Southbound", station1);
+//		
+//		station1.addConnection(connection1);
+//		station2.addConnection(connection2);
+//		place1.addStation(station1);
+//		place2.addStation(station2);
+//		network.addPlace(place1);
+//		network.addPlace(place2);
+//		String yaml = new YamlDataStore().encodeNetwork(network);
+//		Network net2 = new YamlDataStore().decodeNetwork(yaml);
+//		String yaml2 = new YamlDataStore().encodeNetwork(net2);
+//		System.out.println(yaml2);
+//		
+//	}
 }

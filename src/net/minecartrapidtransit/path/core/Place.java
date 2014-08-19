@@ -54,8 +54,8 @@ public class Place {
 	public void addStation(Station station){
 		station.setPlace(this);
 		for(Station otherStation : stations){
-			otherStation.addConnection(new Connection(S.type_TRANSFER, 10, null, station));
-			station.addConnection(new Connection(S.type_TRANSFER, 10, null, otherStation));
+			otherStation.addConnection(new Connection(S.type_TRANSFER, S.transfercost, null, station));
+			station.addConnection(new Connection(S.type_TRANSFER, S.transfercost, null, otherStation));
 		}
 		stations.add(station);
 	}

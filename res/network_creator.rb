@@ -121,7 +121,7 @@ module Network
         end
       end
       # That's it. Print, profit
-      puts YAML.dump yaml
+      puts "#{output}---\n!network\n#{YAML.dump(yaml)[4..-1]}"
     end
 
     def self.go(name = "", &block)
