@@ -1,15 +1,16 @@
 package net.minecartrapidtransit.path.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import org.junit.Test;
-import org.yaml.snakeyaml.Yaml;
-
-import net.minecartrapidtransit.path.core.*;
+import net.minecartrapidtransit.path.core.Network;
+import net.minecartrapidtransit.path.core.Pathfinder;
+import net.minecartrapidtransit.path.core.Route;
 import net.minecartrapidtransit.path.data.YamlDataStore;
+
+import org.junit.Test;
 public class PathfinderTest {
 
 	@Test
