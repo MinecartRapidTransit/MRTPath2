@@ -8,11 +8,14 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import net.minecartrapidtransit.path.constants.S;
+import net.minecartrapidtransit.path.core.Connection;
 import net.minecartrapidtransit.path.core.Network;
+import net.minecartrapidtransit.path.core.Place;
+import net.minecartrapidtransit.path.core.Station;
 
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
@@ -27,56 +30,20 @@ public class YamlDataStore implements DataFormat {
 
 	@Override
 	public String encodeNetwork(Network network) {
+		Representer representer = new Representer();
+		representer.setPropertyUtils(new CustomPropertyUtils());
+		representer.addClassTag(NetworkData.class, new Tag("!network"));
 		NetworkData nd = new NetworkData(network);
-		return encodeTag(nd);
+		Yaml yaml = new Yaml(representer);
+		return yaml.dump(nd);
 	}
 
 	@Override
 	public Network decodeNetwork(String string) {
-		List<TLDTag> tags = decodeTags(string);
-		NetworkData nd = new NetworkData();
-		for(TLDTag tag : tags){
-			if(tag instanceof NetworkData){
-				nd.merge((NetworkData) tag); 
-			}else if(tag instanceof PlacesData){
-				nd.addPlacesData((PlacesData) tag);
-			}else if(tag instanceof LineData){
-				nd.addLineData((LineData) tag);
-			}
-		}
-		return nd.toNetwork();
-	}
-	
-	public String encodeTag(TLDTag tag){
-		Representer representer = new Representer();
-		representer.setPropertyUtils(new CustomPropertyUtils());
-		representer.addClassTag(NetworkData.class, new Tag("!network"));
-		representer.addClassTag(PlacesData.class, new Tag("!places"));
-		representer.addClassTag(LineData.class, new Tag("!line"));
-		Yaml yaml = new Yaml(representer);
-		return yaml.dump(tag);
-	}
-	
-	public List<TLDTag> decodeTags(String string){
-		List<TLDTag> tags = new LinkedList<TLDTag>();
 		Constructor constructor = new Constructor();
 		constructor.addTypeDescription(new TypeDescription(NetworkData.class, "!network"));
-		constructor.addTypeDescription(new TypeDescription(PlacesData.class, "!places"));
-		constructor.addTypeDescription(new TypeDescription(LineData.class, "!line"));
 		Yaml yaml = new Yaml(constructor);
-		for(Object object : yaml.loadAll(string)){
-			tags.add((TLDTag) object);
-		}
-		return tags;
-	}
-	
-	public String encodeTags(List<TLDTag> tags){
-		StringBuilder sb = new StringBuilder();
-		for(TLDTag tag : tags){
-			sb.append("---\n");
-			sb.append(encodeTag(tag));
-		}
-		return sb.toString();
+		return ((NetworkData) yaml.load(string)).toNetwork();
 	}
 	
 	private class CustomPropertyUtils extends PropertyUtils {
@@ -113,26 +80,26 @@ public class YamlDataStore implements DataFormat {
 			  return new String(encoded, encoding);
 			}
 	
-//	//TODO remove this
-//	public static void main(String args[]){
-//		Network network = new Network();
-//		Place place1 = new Place("ARLI", "Arlington");
-//		Station station1 = new Station("TFM District Arlington", "TFM-1", new LinkedList<Connection>());
-//		Place place2 = new Place("RVTH", "Redstone Valley TransHUB");
-//		Station station2 = new Station("TFM District Redstone Valley", "TFM-2", new LinkedList<Connection>());
-//		Connection connection1 = new Connection(S.type_RAIL, 100, "TFM Northbound", station2);
-//		Connection connection2 = new Connection(S.type_RAIL, 100, "TFM Southbound", station1);
-//		
-//		station1.addConnection(connection1);
-//		station2.addConnection(connection2);
-//		place1.addStation(station1);
-//		place2.addStation(station2);
-//		network.addPlace(place1);
-//		network.addPlace(place2);
-//		String yaml = new YamlDataStore().encodeNetwork(network);
-//		Network net2 = new YamlDataStore().decodeNetwork(yaml);
-//		String yaml2 = new YamlDataStore().encodeNetwork(net2);
-//		System.out.println(yaml2);
-//		
-//	}
+	//TODO remove this
+	public static void main(String args[]){
+		Network network = new Network();
+		Place place1 = new Place("ARLI", "Arlington");
+		Station station1 = new Station("TFM District Arlington", "TFM-1", new LinkedList<Connection>());
+		Place place2 = new Place("RVTH", "Redstone Valley TransHUB");
+		Station station2 = new Station("TFM District Redstone Valley", "TFM-2", new LinkedList<Connection>());
+		Connection connection1 = new Connection(S.type_RAIL, 100, "TFM Northbound", station2);
+		Connection connection2 = new Connection(S.type_RAIL, 100, "TFM Southbound", station1);
+		
+		station1.addConnection(connection1);
+		station2.addConnection(connection2);
+		place1.addStation(station1);
+		place2.addStation(station2);
+		network.addPlace(place1);
+		network.addPlace(place2);
+		String yaml = new YamlDataStore().encodeNetwork(network);
+		Network net2 = new YamlDataStore().decodeNetwork(yaml);
+		String yaml2 = new YamlDataStore().encodeNetwork(net2);
+		System.out.println(yaml2);
+		
+	}
 }
