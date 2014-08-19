@@ -3,7 +3,7 @@ package net.minecartrapidtransit.path.data;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecartrapidtransit.path.constants.C;
+import net.minecartrapidtransit.path.constants.S;
 import net.minecartrapidtransit.path.core.Connection;
 import net.minecartrapidtransit.path.core.Station;
 
@@ -14,7 +14,7 @@ public class StationData {
 		this.id = station.getId();
 		this.connections = new LinkedList<ConnectionData>();
 		for(Connection connection : station.getConnections()) {
-			if(connection.getType() != C.type_TRANSFER){
+			if(connection.getType() != S.type_TRANSFER){
 				this.connections.add(new ConnectionData(connection));
 			}
 		}

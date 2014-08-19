@@ -1,6 +1,6 @@
 package net.minecartrapidtransit.path.constants;
 
-public class C {
+public class S {
 	public static final String type_FOOT = "FOOT";
 	public static final String type_BUS = "BUS";
 	public static final String type_RAIL = "RAIL";
@@ -9,6 +9,4 @@ public class C {
 	public static final String type_TRANSFER = "TRANSFER";
 	public static final String id_START = "START";
 	public static final String id_END = "END";
-	
-	public static final int transfer_cost = 10;
 }
