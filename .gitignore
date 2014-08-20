@@ -5,3 +5,7 @@
 !lib/*.jar
 bin/*
 /bin
+
+.gradle/
+.gradletasknamecache
+build/
