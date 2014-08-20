@@ -7,11 +7,33 @@ buildscript {
   }
 }
 
+
+
+allprojects {
+  version = '2.0.1' 
+  apply plugin: 'github-pages'
+}
+
+task createVersionFile << {
+  PrintWriter writer = new PrintWriter("${project.rootDir}/version")
+  writer.println(version)
+  writer.close()
+}
+
+githubPages {
+  repoUri = uploaduri
+  targetBranch = uploadbranch
+  pages {
+    from "${project.rootDir}/version"
+  }
+}
+
+publishGhPages.dependsOn createVersionFile
+
 subprojects {
 
   apply plugin: 'java'
   apply plugin: 'eclipse'
-  apply plugin: 'github-pages'
 
   repositories {
     mavenCentral()
@@ -21,7 +43,6 @@ subprojects {
     testCompile 'junit:junit:4.11'
   }
 
-  version = '2.0-dev'
   sourceCompatibility = 1.7
 
   jar {
@@ -29,8 +50,8 @@ subprojects {
   }
 
   githubPages {
-    repoUri = githuburi
-    targetBranch = 'master'
+    repoUri = uploaduri
+    targetBranch = uploadbranch
     pages {
       from jar.outputs.files
     }

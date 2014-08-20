@@ -1,3 +1,10 @@
-githuburi=https://github.com/MinecartRapidTransit/MinecartRapidTransit.github.io/
+uploaduri=https://github.com/MinecartRapidTransit/MinecartRapidTransit.github.io/
+uploadbranch=master
+uploaddir=dl/
+
+javadocbranch=gh-pages
+javadocuri=https://github.com/MinecartRapidTransit/MRTPath2/
+javadocdir=/
+
 systemProp.org.ajoberstar.grgit.auth.username=<your username>
 systemProp.org.ajoberstar.grgit.auth.password=<your password>

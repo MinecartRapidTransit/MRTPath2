@@ -19,6 +19,7 @@ public class Launcher extends JFrame {
 	
 	private JLabel label;
 	private JProgressBar pb;
+	private FileStoreUtils fsu;
 	
 	public Launcher() throws IOException{
 		super("MRTPath Launcher");
@@ -27,7 +28,7 @@ public class Launcher extends JFrame {
 		setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
 		
-		label = new JLabel("Updating hashes file");
+		label = new JLabel("Loading");
 		label.setHorizontalAlignment(JLabel.CENTER);
 		add(label, BorderLayout.PAGE_START);
 		
@@ -52,13 +53,12 @@ public class Launcher extends JFrame {
 	}
 	
 	private void updateFiles(){
-		try{ // First let's get the hashes file
-			updateFile(S.filesLocation, S.files);
-			// Now we can check if each file is up to date
-			FileStoreUtils fsu = new FileStoreUtils(S.files);
-			updateFile(fsu, S.jar);
-			updateFile(fsu, S.gui);
-			updateFile(fsu, S.yaml);
+		try{ // First let's get the version file
+			downloadFile("version");
+			fsu = new FileStoreUtils("version");
+			updateFile("api", "jar");
+			updateFile("gui", "jar");
+			downloadFile("mrtnetwork.yml");
 		}catch(Exception e){
 			e.printStackTrace();
 			JOptionPane.showConfirmDialog(null, "There was a problem downloading the file. This may have been caused by us or by"
@@ -68,7 +68,7 @@ public class Launcher extends JFrame {
 	}
 	
 	private void launchJar() throws IOException, InterruptedException {
-		String classpath = FileStoreUtils.getDataFilePath(S.jar) + File.pathSeparator + FileStoreUtils.getDataFilePath(S.gui);
+		String classpath = fsu.getVersionedDataFilePath("api", "jar") + File.pathSeparator + fsu.getVersionedDataFilePath("gui", "jar");
 		Process i = Runtime.getRuntime().exec(new String[]{"java", "-cp", classpath, S.main_class});
 		setVisible(false);
 		String line;
@@ -84,14 +84,13 @@ public class Launcher extends JFrame {
 
 	}
 	
-	private void updateFile(String inet, String file) throws IOException {
-		label.setText(String.format("Downloading file \"%s\"", file));
-		pb.setValue(0);
-		Downloader.guiDownload(inet, FileStoreUtils.getDataFilePath(file), pb);
-	}
-	private void updateFile(FileStoreUtils fsu, String file) throws IOException {
-		if(fsu.fileNeedsUpdating(file)) updateFile(fsu.getInetPath(file), file);
+	private void downloadFile(String file) throws IOException{
+		label.setText(String.format("Downloading file: %s", file));
+		Downloader.guiDownload(S.filesLocation + file, FileStoreUtils.getDataFilePath(file), pb);
 	}
 	
+	private void updateFile(String file, String type) throws IOException {
+		downloadFile(fsu.getVersionedFile(file, type));
+	}
 	
 }
