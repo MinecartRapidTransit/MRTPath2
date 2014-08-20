@@ -9,3 +9,7 @@ bin/*
 .gradle/
 .gradletasknamecache
 build/
+
+.classpath
+.project
+.settings/
