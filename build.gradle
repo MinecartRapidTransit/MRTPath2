@@ -1,20 +1,39 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.ajoberstar:gradle-git:0.9.0'
+  }
+}
+
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'eclipse'
 
-    repositories {
-       mavenCentral()
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+  apply plugin: 'github-pages'
+
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    testCompile 'junit:junit:4.11'
+  }
+
+  version = '2.0-dev'
+  sourceCompatibility = 1.7
+
+  jar {
+    manifest.attributes provider: 'gradle'
+  }
+
+  githubPages {
+    repoUri = githuburi
+    targetBranch = 'master'
+    pages {
+      from jar.outputs.files
     }
-
-    dependencies {
-        testCompile 'junit:junit:4.11'
-    }
-
-    version = '2.0-dev'
-    sourceCompatibility = 1.7
-
-    jar {
-        manifest.attributes provider: 'gradle'
-    }
+  }
 }
 
